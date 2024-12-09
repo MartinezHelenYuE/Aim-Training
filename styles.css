@@ -14,8 +14,10 @@ body {
 }
 
 #gameArea {
-    width: 600px;
-    height: 400px;
+    width: 90%;
+    max-width: 600px;
+    height: 60vh;
+    max-height: 400px;
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid #fff;
     position: relative;
@@ -25,8 +27,10 @@ body {
 }
 
 .target {
-    width: 50px;
-    height: 50px;
+    width: 8vw;
+    height: 8vw;
+    max-width: 50px;
+    max-height: 50px;
     background-color: rgba(255, 0, 0, 0.8);
     position: absolute;
     border-radius: 50%;
@@ -54,4 +58,19 @@ button {
 
 button:hover {
     background-color: #2980b9;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    #gameArea {
+        height: 50vh;
+    }
+
+    .target {
+        width: 10vw;
+        height: 10vw;
+    }
 }
