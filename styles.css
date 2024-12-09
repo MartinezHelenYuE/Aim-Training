@@ -1,10 +1,9 @@
-/* Основные стили */
 body {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
@@ -12,20 +11,15 @@ body {
 #mainMenu, #game {
     text-align: center;
     color: white;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    box-sizing: border-box;
 }
 
 #gameArea {
-    width: 100%;
-    max-width: 400px;
-    height: 300px;
+    width: 600px;
+    height: 400px;
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid #fff;
     position: relative;
-    margin: 20px auto;
+    margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
 }
@@ -56,50 +50,8 @@ button {
     color: white;
     transition: background-color 0.3s;
     margin-top: 10px;
-    width: 100%;
-    max-width: 200px;
 }
 
 button:hover {
     background-color: #2980b9;
-}
-
-/* Медиазапросы */
-@media (max-width: 768px) {
-    #gameArea {
-        height: 250px;
-    }
-
-    .target {
-        width: 40px;
-        height: 40px;
-    }
-
-    button {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    #mainMenu, #game {
-        padding: 15px;
-    }
-
-    #gameArea {
-        height: 200px;
-    }
-
-    .target {
-        width: 30px;
-        height: 30px;
-    }
-
-    button {
-        font-size: 12px;
-        padding: 8px 16px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
 }
