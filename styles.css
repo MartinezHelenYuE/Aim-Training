@@ -6,6 +6,7 @@ body {
     height: 100vh;
     margin: 0;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    flex-direction: column; /* Для удобного отображения на узких экранах */
 }
 
 #mainMenu, #game {
@@ -14,8 +15,10 @@ body {
 }
 
 #gameArea {
-    width: 600px;
-    height: 400px;
+    width: 90%; /* Уменьшаем ширину на мобильных устройствах */
+    max-width: 600px;
+    height: 60vh; /* Привязываем высоту к экрану */
+    max-height: 400px;
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid #fff;
     position: relative;
@@ -54,4 +57,38 @@ button {
 
 button:hover {
     background-color: #2980b9;
+}
+
+/* Media queries для мобильных устройств */
+@media (max-width: 768px) {
+    #gameArea {
+        width: 95%;
+        height: 50vh; /* Уменьшаем высоту для узких экранов */
+    }
+
+    .target {
+        width: 40px; /* Уменьшаем размер цели */
+        height: 40px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 14px; /* Уменьшаем размер текста на кнопках */
+    }
+}
+
+@media (max-width: 480px) {
+    #gameArea {
+        height: 40vh; /* Ещё меньше высота для самых маленьких экранов */
+    }
+
+    .target {
+        width: 30px;
+        height: 30px;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
 }
