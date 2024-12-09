@@ -1,70 +1,71 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
-    overflow: hidden; /* предотвращаем прокрутку */
-}
+document.addEventListener('DOMContentLoaded', (event) => {
+    const mainMenu = document.getElementById('mainMenu');
+    const game = document.getElementById('game');
+    const startEasyButton = document.getElementById('startEasyButton');
+    const startMediumButton = document.getElementById('startMediumButton');
+    const startHardButton = document.getElementById('startHardButton');
+    const backToMenuButton = document.getElementById('backToMenuButton');
+    const gameArea = document.getElementById('gameArea');
+    const scoreDisplay = document.getElementById('score');
+    let score = 0;
+    let difficulty = 'easy';
+    const records = {
+        easy: localStorage.getItem('easyRecord') || 0,
+        medium: localStorage.getItem('mediumRecord') || 0,
+        hard: localStorage.getItem('hardRecord') || 0
+    };
 
-#mainMenu, #game {
-    text-align: center;
-    color: white;
-    padding: 20px;
-}
+    startEasyButton.addEventListener('click', () => startGame('easy'));
+    startMediumButton.addEventListener('click', () => startGame('medium'));
+    startHardButton.addEventListener('click', () => startGame('hard'));
 
-#gameArea {
-    width: 90vw; /* адаптивная ширина */
-    height: 50vh; /* адаптивная высота */
-    max-width: 600px;
-    max-height: 400px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid #fff;
-    position: relative;
-    margin: 0 auto;
-    border-radius: 15px;
-    overflow: hidden;
-}
+    backToMenuButton.addEventListener('click', () => {
+        game.style.display = 'none';
+        mainMenu.style.display = 'block';
+        if (score > records[difficulty]) {
+            records[difficulty] = score;
+            localStorage.setItem(`${difficulty}Record`, score);
+        }
+        score = 0;
+        scoreDisplay.textContent = score;
+        gameArea.innerHTML = '';
+    });
 
-.target {
-    width: 10vw; /* адаптивная ширина */
-    height: 10vw; /* адаптивная высота */
-    max-width: 50px;
-    max-height: 50px;
-    background-color: rgba(255, 0, 0, 0.8);
-    position: absolute;
-    border-radius: 50%;
-    cursor: pointer;
-    animation: fadeInOut 1s linear;
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1); }
-    100% { opacity: 0; transform: scale(0.5); }
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 4vw; /* адаптивный размер шрифта */
-    max-font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #3498db;
-    color: white;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-@media (min-width: 600px) {
-    button {
-        font-size: 16px; /* фиксированный размер шрифта для больших экранов */
+    function startGame(selectedDifficulty) {
+        difficulty = selectedDifficulty;
+        mainMenu.style.display = 'none';
+        game.style.display = 'block';
+        createTarget();
     }
-}
+
+    function createTarget() {
+        const target = document.createElement('div');
+        target.classList.add('target');
+        target.style.top = `${Math.random() * (gameArea.clientHeight - 50)}px`;
+        target.style.left = `${Math.random() * (gameArea.clientWidth - 50)}px`;
+        gameArea.appendChild(target);
+
+        target.addEventListener('click', () => {
+            score++;
+            scoreDisplay.textContent = score;
+            gameArea.removeChild(target);
+            setTimeout(createTarget, 500); // Добавляем задержку перед созданием нового круга
+        });
+
+        setTimeout(() => {
+            if (gameArea.contains(target)) {
+                gameArea.removeChild(target);
+                setTimeout(createTarget, 500); // Добавляем задержку перед созданием нового круга
+            }
+        }, getTimeout());
+    }
+
+    function getTimeout() {
+        switch (difficulty) {
+            case 'easy': return 1500;
+            case 'medium': return 1000;
+            case 'hard': return 500;
+            default: return 1000;
+        }
+    }
+});
