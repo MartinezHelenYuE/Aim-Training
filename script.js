@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     function createTarget() {
         const target = document.createElement('div');
         target.classList.add('target');
-        target.style.top = `${Math.random() * (gameArea.clientHeight - target.clientHeight)}px`;
-        target.style.left = `${Math.random() * (gameArea.clientWidth - target.clientWidth)}px`;
+        target.style.top = `${Math.random() * (gameArea.clientHeight - 50)}px`;
+        target.style.left = `${Math.random() * (gameArea.clientWidth - 50)}px`;
         gameArea.appendChild(target);
 
         target.addEventListener('click', () => {
