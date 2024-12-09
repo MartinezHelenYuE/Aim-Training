@@ -1,31 +1,32 @@
-body {
+html, body {
+    overflow: hidden;
+    touch-action: none;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
     background: linear-gradient(135deg, #71b7e6, #9b59b6);
-    flex-direction: column;
-    padding: 0 10px;
-    box-sizing: border-box;
 }
 
 #mainMenu, #game {
     text-align: center;
     color: white;
     width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 #gameArea {
     width: 100%;
-    max-width: 600px;
-    height: auto;
-    aspect-ratio: 3 / 2;
+    padding-bottom: 66.67%; /* Aspect ratio 3:2 */
+    position: relative;
     background-color: rgba(255, 255, 255, 0.1);
     border: 2px solid #fff;
-    position: relative;
-    margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
 }
@@ -60,14 +61,6 @@ button {
 
 button:hover {
     background-color: #2980b9;
-}
-
-@media (max-width: 600px) {
-    #gameArea {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 3 / 2;
-    }
 }
 
 @media (max-width: 480px) {
